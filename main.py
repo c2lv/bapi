@@ -36,7 +36,8 @@ async def upload_image(file: UploadFile):
         file_name = file.filename
         # S3에 이미지 업로드
         s3.upload_fileobj(file.file, AWS_BUCKET_NAME, file_name)
-        return {"message": "이미지가 성공적으로 업로드되었습니다."}
+        s3_url = f"https://{AWS_BUCKET_NAME}.s3.amazonaws.com/{file_name}"
+        return {"message": "이미지가 성공적으로 업로드되었습니다.", "s3_url": s3_url}
     except NoCredentialsError:
         return {"error": "AWS 자격 증명 오류"}
     except botocore.exceptions.ClientError as e:
