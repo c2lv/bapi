@@ -4,6 +4,7 @@ import boto3
 import botocore
 from botocore.exceptions import NoCredentialsError
 import os
+import uvicorn
 
 app = FastAPI()
 
@@ -41,6 +42,6 @@ async def upload_image(file: UploadFile):
     except botocore.exceptions.ClientError as e:
         return {"error": str(e)}
 
-if __name__ == "__main__":
-    import uvicorn
-    uvicorn.run(app, host="0.0.0.0", port=8000)
+# if __name__ == "__main__":
+#     import uvicorn
+#     uvicorn.run(app, host="0.0.0.0", port=8000)
